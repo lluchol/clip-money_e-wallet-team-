@@ -1,0 +1,72 @@
+<body>
+    <div class="row">
+        <div class="col">
+            <div class="wrapper fadeInDown">
+
+                <div id="formContent">
+                    <div class="row">
+                        <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                            <div class="fadeIn first">
+                                <img [src]="fotoUsuario" id="icon" alt="User Icon" />
+                            </div>
+                        </div>
+                        
+                        <div class=" titulo-datos col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                            <h2>
+                                <b>{{nombreUsuario}}</b>
+                            </h2>
+                        </div>
+                        
+                        <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                            <table class="table table-responsive">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">Nombre</th>
+                                        <th scope="col">Apellido</th>
+                                        <th scope="col">Sexo</th>
+                                        <th scope="col">Fecha de Nacimiento</th>
+                                        <!--<th scope="col">Tipo de DNI</th>-->
+                                        <th scope="col">DNI</th>
+                                        <th scope="col">Email</th>
+                                        <th scope="col">Teléfono</th>
+                                        <!-- <th scope="col">País</th> -->
+                                        <!-- <th scope="col">Provincia</th> -->
+                                        <!--<th scope="col">Localidad</th>-->
+                                        <th scope="col">Domicilio</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>{{nombre}}</td>
+                                        <td>{{apellido}}</td>
+                                        <td>{{sexo}}</td>
+                                        <td>{{fechaNacimiento}}</td>
+                                        <!--<td>{{idTipoDni}}</td>-->
+                                        <td>{{numDni}}</td>
+                                        <td>{{email}}</td>
+                                        <td>{{telefono}}</td>
+                                        <!-- <td>{{telefono}}</td> -->
+                                        <!-- <td>{{telefono}}</td> -->
+                                        <!--<td>{{idLocalidad}}</td>-->
+                                        <td>{{domicilio}}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                            <button class="btn btn-primary btnModificar" routerLink = "/home/cliente/modificar">Modificar Perfil</button>
+                        </div>
+
+                        <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                            <button id= "btnRegresar" title="Regresar" class="btn btn-primary"(click)="regresarClick()"></button>
+                        </div>
+                    </div>
+                </div>
+        
+            </div>
+        </div>
+    </div>
+
+</body>
+

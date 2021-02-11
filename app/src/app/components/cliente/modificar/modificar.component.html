@@ -1,0 +1,169 @@
+<link href="https://unpkg.com/ionicons@4.5.10-0/dist/css/ionicons.min.css" rel="stylesheet">
+<body>
+    <div class="wrapper fadeInDown">
+
+        <div id="formContent">
+
+            <div class="fadeIn first">
+                <img [src]="selectedCliente.SelfieCliente" id="icon" alt="User Icon"/>
+                <a (click)="modificarSelfie()"><i class="fas fa-user-edit icono-modificarimagen"></i></a>
+                <a class="btnModificarPass" routerLink = "/home/cliente/modificarpassword">Modificar Password</a>
+            </div>
+
+
+            <form (ngSubmit)="onSubmit(selectedCliente)" [formGroup] = "form">
+               
+              <div class="row">
+                <!--PRIMERA columna de campos-->
+                  <div class="col-xs-12 col-sm-12 col-md-12 col-lg-6 borde">
+
+                    <div class="form-group">
+                        <label class="form-control" for="fechaNac">Fecha de Nacimiento</label>
+                        <input type="date" class="form-control fadeIn" title="Fecha de Nacimiento" [(ngModel)]="selectedCliente.FechaNacimiento" formControlName= "fechaNac"
+                        [ngClass]="{ 'is-invalid': form.get('fechaNac')?.touched && !form.get('fechaNac')?.valid}">
+
+                        <div class="invalid-feedback">
+                            <span *ngIf = "form.get('fechaNac').errors?.required">
+                              Introduzca una Fecha de Nacimiento
+                            </span>
+                        </div>
+                
+                    </div>
+
+                    <div class="form-group">
+                      <label class="form-control" for="email">Email</label> 
+                      <input type="email" [(ngModel)]="selectedCliente.Email" 
+                      class="form-control fadeIn" formControlName = "email"   
+                      [ngClass]="{ 'is-invalid': (form.get('email')?.touched || form.get('email')?.dirty) && !form.get('email')?.valid}">
+                  
+                      <div class="invalid-feedback">
+                          <span *ngIf = "form.get('email').errors?.required">
+                            Introduzca un Email
+                          </span>
+                          <span *ngIf = "form.get('email').errors?.pattern">
+                            Ingresa un formato correcto, ejemplo@ejemplo.com  
+                          </span>
+                      </div>
+                    
+                    </div>
+
+                    <div class="form-group">
+                      <label class="form-control" for="telefono">Telefono</label>   
+                      <input type="text" [(ngModel)]="selectedCliente.Telefono" 
+                      class="form-control fadeIn" formControlName = "telefono"   
+                      [ngClass]="{ 'is-invalid': (form.get('telefono')?.touched || form.get('telefono')?.dirty) && !form.get('telefono')?.valid}">
+                  
+                      <div class="invalid-feedback">
+                          <span *ngIf = "form.get('telefono').errors?.required">
+                            Introduzca un Telefono
+                          </span>
+                          <span *ngIf = "form.get('telefono').errors?.pattern">
+                            Ingrese los 10 dígitos numéricos sin el prefijo
+                          </span>
+                      </div>
+                  
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-control" for="usuario">Nombre Usuario</label>
+                        <input type="text"  [(ngModel)]="selectedCliente.NombreUsuario"  
+                        class="form-control fadeIn" formControlName = "usuario"
+                        [ngClass]="{ 'is-invalid': (form.get('usuario')?.touched || form.get('usuario')?.dirty) && !form.get('usuario')?.valid}">
+                  
+                        <div class="invalid-feedback">
+                            <span *ngIf = "form.get('usuario').errors?.required">
+                              Introduzca un Usuario
+                            </span>
+                            <span *ngIf = "form.get('usuario').errors?.pattern">
+                              Debe contener al menos 5 caracteres Alfanuméricos, sin espacios en blanco 
+                            </span>
+                        </div>
+                          
+                    </div>
+
+                  </div>
+
+                  <!-- SEGUNDA Columna de campos -->
+                  <div class="col-xs-12 col-sm-12 col-md-12 col-lg-6 borde">
+
+                    <div class="form-group">
+                      <label class="form-control" for="domicilio">Domicilio</label> 
+                      <input type="text"  [(ngModel)]="selectedCliente.Domicilio" 
+                      class="form-control fadeIn" formControlName = "domicilio"   
+                      [ngClass]="{ 'is-invalid': (form.get('domicilio')?.touched || form.get('domicilio')?.dirty) && !form.get('domicilio')?.valid}">
+                  
+                      <div class="invalid-feedback">
+                          <span *ngIf = "form.get('domicilio').errors?.required">
+                            Introduzca un Domicilio
+                          </span>
+                          <span *ngIf = "form.get('domicilio').errors?.pattern">
+                            Ingresa solo caracteres alfanuméricos, longitud máxima 50  
+                          </span>
+                      </div>
+                    
+                     </div>
+                     <div class="form-group">
+                      <label class="form-control" for="pais">Pais</label>  
+                       <select class= "form-control fadeIn" [ngModel]="" [(ngModel)] = "idPais" formControlName= "pais" (change) = "onSelectPais($event.target.value)"
+                       [ngClass]="{ 'is-invalid': (form.get('pais')?.touched || form.get('pais')?.dirty) && !form.get('pais')?.valid}" > 
+                        <option *ngFor ="let pais of paises" value={{pais.id}}>{{pais.nombre}}</option>
+                       </select>
+                      
+                        <div class="invalid-feedback">
+                        <span *ngIf = "form.get('pais').errors?.required">
+                          Seleccione un pais
+                        </span>
+                        </div>
+
+                      </div>
+
+                      <div class="form-group">
+                        <label class="form-control" for="provinvia">Provincia</label>
+                        <select class= "form-control fadeIn"  [(ngModel)] = "idProvincia" formControlName= "provincia" (change) = "onSelectProv($event.target.value)"
+                        [ngClass]="{ 'is-invalid': (form.get('provincia')?.touched || form.get('provincia')?.dirty) && !form.get('provincia')?.valid}" >
+                          <option *ngFor="let provincia of provincias" value={{provincia.id}}>{{provincia.nombre}}</option>
+                        </select>
+                       
+                        <div class="invalid-feedback">
+                          <span *ngIf = "form.get('provincia').errors?.required">
+                            Seleccione una provincia
+                          </span>
+                        </div>
+
+                      </div>
+
+                      <div class="form-group">
+                        <label class="form-control" for="localidad">Localidad</label> 
+                        <select class= "form-control"  formControlName= "localidad" [(ngModel)] = "idLocalidad"
+                        [ngClass]="{ 'is-invalid': (form.get('localidad')?.touched || form.get('localidad')?.dirty) && !form.get('localidad')?.valid}" >
+                        <option *ngFor="let localidades of localidades" value={{localidades.id}}>{{localidades.nombre}}</option>
+                        </select>
+                       
+                        <div class="invalid-feedback">
+                          <span *ngIf = "form.get('localidad').errors?.required">
+                            Seleccione una localidad
+                          </span>
+                        </div>
+
+                      </div>
+
+                  </div>
+
+                  <div class="col-md-12">
+                    <div class="alert alert-danger alert-dismissible fade show" role="alert" *ngIf="isCreateFailed">
+                      {{message}}
+                      <button type="button" class="close" data-dismiss="alert" aria-label="Close" (click) = "resetAlert()">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                    </div>
+
+                    <button class="btn btn-primary btnModificar" [disabled]="form.invalid" >Modificar</button>
+                  </div>
+                  
+              </div>
+            </form>
+            <button id= "btnRegresar" title="Regresar" class="btn btn-primary" routerLink = "/home/cliente/obtener"></button>
+        </div>
+        
+    </div>
+</body>
