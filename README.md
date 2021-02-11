@@ -1,2 +1,2 @@
-# clip-money_e-wallet-team-
+# clip-money
 Billetera electrónica "clip-money" realizada en equipo
